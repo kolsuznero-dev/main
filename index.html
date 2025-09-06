@@ -1,132 +1,122 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Kolsuz Nero</title>
   <style>
-    /* Genel */
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f5f7fa;
-      color: #333;
+    :root{
+      --blue1:#1e3c72;
+      --blue2:#2a5298;
+      --card-bg:#ffffff;
+      --page-bg:#f5f7fa;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: "Segoe UI", Roboto, Arial, sans-serif;
+      background:var(--page-bg);
+      color:#222;
+      -webkit-font-smoothing:antialiased;
     }
 
-    header {
-      background: linear-gradient(135deg, #1e3c72, #2a5298);
-      color: white;
-      padding: 1.5rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    /* Header */
+    header{
+      background: linear-gradient(135deg,var(--blue1),var(--blue2));
+      color:white;
+      padding:18px 12px;
+      box-shadow:0 4px 18px rgba(0,0,0,0.12);
+    }
+    .header-inner{
+      max-width:1100px;
+      margin:0 auto;
+      display:flex;
+      gap:16px;
+      align-items:center;
+      padding:6px;
+    }
+    .profile-pic{
+      width:72px;
+      height:72px;
+      border-radius:50%;
+      border:3px solid rgba(255,255,255,0.9);
+      object-fit:cover;
+      flex:0 0 72px;
+    }
+    .title{
+      display:flex;
+      flex-direction:column;
+      align-items:flex-start;
+    }
+    .title h1{margin:0;font-size:1.6rem;letter-spacing:0.2px}
+    .title p{margin:4px 0 0;font-size:0.95rem;opacity:0.95}
+
+    /* Main layout */
+    main{max-width:1100px;margin:24px auto;padding:0 16px}
+    .grid{display:grid;grid-template-columns:1fr 360px;gap:18px}
+    @media (max-width:900px){ .grid{grid-template-columns:1fr} }
+
+    section.card{
+      background:var(--card-bg);
+      border-radius:12px;
+      padding:18px;
+      box-shadow:0 6px 18px rgba(20,30,60,0.06);
+    }
+    h2{color:var(--blue2);margin:0 0 12px 0}
+
+    /* RSS feed list */
+    .feed-block{margin-bottom:12px}
+    .feed-title{font-weight:600;color:var(--blue1);margin-bottom:8px}
+    .feed-list{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+    .feed-list li{
+      background:#f0f4ff;
+      padding:10px 12px;border-radius:8px;
+      transition:transform .12s,box-shadow .12s;
+    }
+    .feed-list li:hover{transform:translateY(-4px);box-shadow:0 6px 16px rgba(30,50,120,0.08)}
+    .feed-list a{color:var(--blue2);text-decoration:none;font-weight:500}
+
+    /* Music widget (right column) */
+    .music-widget{display:flex;flex-direction:column;gap:12px;align-items:stretch}
+    .track-info{display:flex;gap:12px;align-items:center}
+    .track-meta{flex:1}
+    .track-meta .track-title{font-weight:700}
+    .track-meta .track-sub{font-size:0.9rem;color:#555;margin-top:4px}
+
+    .controls{display:flex;gap:8px;align-items:center}
+    .btn{
+      background:var(--blue1);
+      color:white;
+      border:none;
+      padding:10px 14px;
+      border-radius:10px;
+      cursor:pointer;
+      font-weight:600;
+    }
+    .btn.secondary{background:#e6eefc;color:var(--blue2);font-weight:700}
+    .btn:active{transform:translateY(1px)}
+
+    .progress{
+      width:100%;
+      height:8px;
+      background:#eef4ff;
+      border-radius:8px;
+      overflow:hidden;
+    }
+    .progress > span{
+      display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue1),var(--blue2));
     }
 
-    .header-content {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 15px;
-    }
-
-    .profile-pic {
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-      border: 3px solid white;
-      object-fit: cover;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 2.5rem;
-    }
-
-    header p {
-      margin-top: 0.3rem;
-      font-size: 1.2rem;
-      opacity: 0.9;
-    }
-
-    main {
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
-
-    section {
-      background: white;
-      padding: 1.5rem;
-      margin-bottom: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-      transition: transform 0.2s ease;
-    }
-
-    section:hover {
-      transform: translateY(-4px);
-    }
-
-    h2 {
-      margin-top: 0;
-      color: #2a5298;
-    }
-
-    p {
-      line-height: 1.6;
-    }
-
-    /* RSS haberleri */
-    #rss-feed h2 {
-      margin-bottom: 1rem;
-    }
-
-    .feed-block {
-      margin-bottom: 1.5rem;
-    }
-
-    .feed-block h3 {
-      margin: 0 0 0.5rem;
-      color: #1e3c72;
-    }
-
-    .feed-block ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .feed-block li {
-      margin: 0.5rem 0;
-      padding: 0.5rem;
-      background: #f0f4ff;
-      border-radius: 8px;
-      transition: background 0.2s ease;
-    }
-
-    .feed-block li:hover {
-      background: #dbe4ff;
-    }
-
-    .feed-block a {
-      text-decoration: none;
-      color: #2a5298;
-      font-weight: 500;
-    }
-
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background: #1e3c72;
-      color: white;
-      margin-top: 2rem;
-    }
+    footer{max-width:1100px;margin:28px auto 36px;padding:12px 16px;text-align:center;color:#fff;background:linear-gradient(135deg,var(--blue1),var(--blue2));border-radius:10px}
+    small{opacity:.9}
   </style>
 </head>
 <body>
+
   <header>
-    <div class="header-content">
+    <div class="header-inner">
       <img src="profil.jpg" alt="Kolsuz Nero" class="profile-pic">
-      <div>
+      <div class="title">
         <h1>Kolsuz Nero</h1>
         <p>İsviçre çakısı gibi bir adam 🔧🎤✍️🎨</p>
       </div>
@@ -134,47 +124,233 @@
   </header>
 
   <main>
-    <section>
-      <h2>Kolsuz Nero Kimdir?</h2>
-      <p>
-        Esenlikler dilerim efendim. Ben Kolsuz Nero. Çok merak edeceğiniz bir yönüm yok ama İsviçre çakısı gibi bir insanım. Özelliklerim say say bitmez ama size birkaçını söyleyebilirim:
-        <br><br>- Öncelikle buradaysanız beni ya Youtube'dan, Instagram'dan ya da X üzerinden tanımışsınızdır. Sosyal medya platformlarımın genel amacı Türk oyun kitlesine hitap etmek.  
-        <br>- Şairim, şiirlerim anlamsal olarak çok güzel ama biçimsel olarak berbattır. Muallim Naci şiirlerimi görse beni sopayla dövmeye gelirdi.  
-        <br>- Sesimi çok iyi kullanabiliyorum. Mesela birçok sesim vardır: normal sesim, kız sesim, bas sesim, diz sesim ve soytarı sesim. Bunun yanında nedenini anlamamakla birlikte bir konuşma bozukluğum var.  
-        <br>- Bazı çizimlerim (perspektif, karakalem vs.) iyidir ve şu an Jojo, Evangelion ve Devil May Cry birleşimi bir manga üzerinde çalışmaktayım.  
-        <br>- Ayrıca RPG Maker üzerinden kendi oyunumu geliştiriyorum. Fazla talep gelirse ve oyunu bitirirsem itch.io üzerinden yayınlarım.  
-        <br><br>Aslında her şey bu kadar başka söylenecek bir söz yok. Tanıştığımıza memnun oldum.
-      </p>
-    </section>
+    <div class="grid">
+      <!-- LEFT: About + Tech RSS feeds -->
+      <div>
+        <section class="card">
+          <h2>Hakkımda</h2>
+          <p>
+            Esenlikler dilerim efendim. Ben Kolsuz Nero. Çok merak edeceğiniz bir yönüm yok ama İsviçre çakısı gibi bir insanım.
+            Şairim, sesim çok yönlü, manga ve oyun projeleriyle meşgulüm. Tanıştığımıza memnun oldum.
+          </p>
+        </section>
 
-    <section id="rss-feed">
-      <h2>Güncel Teknoloji Haberleri</h2>
-    </section>
+        <section class="card" id="tech-feeds">
+          <h2>Güncel Teknoloji Haberleri</h2>
+          <!-- Haberler buraya gelecek -->
+          <div id="feeds-container" aria-live="polite">
+            <p style="color:#666;margin:0">Yükleniyor...</p>
+          </div>
+        </section>
+      </div>
+
+      <!-- RIGHT: Music widget -->
+      <aside>
+        <section class="card music-widget" id="music-card">
+          <h2>Music for Programming</h2>
+
+          <div id="mfp-status">
+            <div class="track-info">
+              <div style="width:64px;height:64px;border-radius:8px;background:#f0f0f0;display:flex;align-items:center;justify-content:center;color:#999">MFP</div>
+              <div class="track-meta">
+                <div class="track-title" id="track-title">Yükleniyor...</div>
+                <div class="track-sub" id="track-sub">Music for Programming - latest</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="controls" style="margin-top:6px">
+            <button id="playBtn" class="btn">Play</button>
+            <button id="stopBtn" class="btn secondary">Stop</button>
+            <a id="openLink" class="btn secondary" style="text-decoration:none" target="_blank" rel="noopener">Siteyi Aç</a>
+          </div>
+
+          <div style="margin-top:8px">
+            <div class="progress" aria-hidden="true"><span id="prog-bar"></span></div>
+            <div style="display:flex;justify-content:space-between;font-size:0.85rem;margin-top:6px;color:#444">
+              <span id="cur-time">00:00</span>
+              <span id="dur-time">00:00</span>
+            </div>
+          </div>
+
+          <!-- Hidden native audio used for playback -->
+          <audio id="mfp-audio" preload="none"></audio>
+        </section>
+
+        <section class="card" style="margin-top:14px">
+          <h2>Hızlı Bağlantılar</h2>
+          <p style="margin:0"><a href="https://github.com" target="_blank" rel="noopener">GitHub</a> · <a href="https://youtube.com" target="_blank" rel="noopener">YouTube</a> · <a href="https://itch.io" target="_blank" rel="noopener">itch.io</a></p>
+        </section>
+      </aside>
+    </div>
   </main>
 
   <footer>
-    © 2025 Kolsuz Nero | Tüm Hakları Saklıdır
+    <small>© 2025 Kolsuz Nero · Tüm Hakları Saklıdır</small>
   </footer>
 
   <script>
-    const feeds = [
+    // ---------- Helpers ----------
+    const allOrigins = url => 'https://api.allorigins.win/get?url=' + encodeURIComponent(url);
+
+    async function fetchXML(url){
+      const res = await fetch(allOrigins(url));
+      if(!res.ok) throw new Error('CORS proxy hata');
+      const json = await res.json();
+      const parser = new DOMParser();
+      const xml = parser.parseFromString(json.contents, 'application/xml');
+      return xml;
+    }
+
+    // ---------- Tech feeds (sol tarafta) ----------
+    const techFeeds = [
       "https://www.theverge.com/rss/index.xml",
       "https://techcrunch.com/feed/",
       "https://www.wired.com/feed/rss"
     ];
 
-    feeds.forEach(url => {
-      fetch(`https://api.rss2json.com/v1/api.json?rss_url=${url}`)
-        .then(res => res.json())
-        .then(data => {
-          let output = `<div class="feed-block"><h3>${data.feed.title}</h3><ul>`;
-          data.items.slice(0, 5).forEach(item => {
-            output += `<li><a href="${item.link}" target="_blank">${item.title}</a></li>`;
+    async function loadTechFeeds(){
+      const container = document.getElementById('feeds-container');
+      container.innerHTML = '';
+      for(const f of techFeeds){
+        try{
+          const xml = await fetchXML(f);
+          const feedTitle = xml.querySelector('channel > title')?.textContent || f;
+          const items = Array.from(xml.querySelectorAll('item')).slice(0,4);
+          const block = document.createElement('div');
+          block.className = 'feed-block';
+          const titleEl = document.createElement('div');
+          titleEl.className = 'feed-title';
+          titleEl.textContent = feedTitle;
+          block.appendChild(titleEl);
+          const ul = document.createElement('ul');
+          ul.className = 'feed-list';
+          items.forEach(it=>{
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            const link = it.querySelector('link')?.textContent || it.querySelector('guid')?.textContent || '#';
+            const t = it.querySelector('title')?.textContent || '—';
+            a.href = link;
+            a.target = '_blank';
+            a.rel = 'noopener';
+            a.textContent = t;
+            li.appendChild(a);
+            ul.appendChild(li);
           });
-          output += "</ul></div>";
-          document.getElementById("rss-feed").innerHTML += output;
+          block.appendChild(ul);
+          container.appendChild(block);
+        }catch(err){
+          console.warn('Feed yüklenemedi', f, err);
+        }
+      }
+      // fallback message if empty
+      if(container.children.length === 0){
+        container.innerHTML = '<p style="color:#666;margin:0">Haberler yüklenemedi. (CORS proxy gerekebilir)</p>';
+      }
+    }
+
+    // ---------- Music For Programming (sağ kutu) ----------
+    async function loadMusicForProgramming(){
+      const rss = 'https://musicforprogramming.net/rss.xml';
+      const audioEl = document.getElementById('mfp-audio');
+      const playBtn = document.getElementById('playBtn');
+      const stopBtn = document.getElementById('stopBtn');
+      const titleEl = document.getElementById('track-title');
+      const subEl = document.getElementById('track-sub');
+      const openLink = document.getElementById('openLink');
+      const progBar = document.getElementById('prog-bar');
+      const curTime = document.getElementById('cur-time');
+      const durTime = document.getElementById('dur-time');
+
+      try{
+        const xml = await fetchXML(rss);
+        const item = xml.querySelector('item');
+        if(!item) throw new Error('No items');
+        const itemTitle = item.querySelector('title')?.textContent || 'Music for Programming';
+        const itemLink = item.querySelector('link')?.textContent || 'https://musicforprogramming.net/latest/';
+        // enclosure may hold the audio url
+        const enclosure = item.querySelector('enclosure');
+        let audioUrl = enclosure ? enclosure.getAttribute('url') : null;
+
+        // Some entries might place audio in <link> or in a media:content - try to find fallback
+        if(!audioUrl){
+          const mediaContent = item.querySelector('media\\:content, content');
+          if(mediaContent) audioUrl = mediaContent.getAttribute('url') || mediaContent.textContent;
+        }
+
+        // If still no audioUrl, try to find mp3 link in description
+        if(!audioUrl){
+          const desc = item.querySelector('description')?.textContent || '';
+          const m = desc.match(/https?:\/\/[^"'\s]+\.mp3/);
+          if(m) audioUrl = m[0];
+        }
+
+        if(!audioUrl) throw new Error('Audio URL bulunamadı');
+
+        // set UI
+        titleEl.textContent = itemTitle;
+        subEl.textContent = 'Music for Programming · Son bölüm';
+        openLink.href = itemLink;
+
+        // set audio src
+        audioEl.src = audioUrl;
+        // don't autoplay to respect browsers — user will press Play
+        audioEl.preload = 'metadata';
+
+        // Update duration/time/progress
+        audioEl.addEventListener('loadedmetadata', ()=>{
+          durTime.textContent = formatTime(audioEl.duration || 0);
         });
-    });
+        audioEl.addEventListener('timeupdate', ()=>{
+          const pct = (audioEl.currentTime / (audioEl.duration || 1)) * 100;
+          progBar.style.width = pct + '%';
+          curTime.textContent = formatTime(audioEl.currentTime || 0);
+        });
+        audioEl.addEventListener('ended', ()=>{
+          playBtn.textContent = 'Play';
+        });
+
+        // Play button
+        playBtn.addEventListener('click', async ()=>{
+          try{
+            if(audioEl.paused){
+              await audioEl.play();
+              playBtn.textContent = 'Pause';
+            }else{
+              audioEl.pause();
+              playBtn.textContent = 'Play';
+            }
+          }catch(e){
+            console.warn('Playback blocked', e);
+          }
+        });
+
+        // Stop button
+        stopBtn.addEventListener('click', ()=>{
+          audioEl.pause();
+          audioEl.currentTime = 0;
+          playBtn.textContent = 'Play';
+        });
+
+      }catch(err){
+        console.error('MFP yükleme hatası', err);
+        document.getElementById('track-title').textContent = 'Yüklenemedi';
+        document.getElementById('track-sub').textContent = 'Music for Programming verisi alınamadı.';
+      }
+    }
+
+    function formatTime(t){
+      if(!isFinite(t)) return '00:00';
+      const m = Math.floor(t/60).toString().padStart(2,'0');
+      const s = Math.floor(t%60).toString().padStart(2,'0');
+      return `${m}:${s}`;
+    }
+
+    // ---------- Init ----------
+    (async function init(){
+      loadTechFeeds();
+      loadMusicForProgramming();
+    })();
   </script>
 </body>
 </html>
