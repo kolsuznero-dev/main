@@ -4,6 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kolsuz Nero</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1, h2 { color: #333; }
+        #rss-feed { margin-top: 30px; }
+        .feed-block { margin-bottom: 25px; }
+        .feed-block h3 { margin-bottom: 10px; color: #444; }
+        .feed-block ul { list-style: none; padding: 0; }
+        .feed-block li { margin-bottom: 8px; }
+        .feed-block a { text-decoration: none; color: #0066cc; }
+        .feed-block a:hover { text-decoration: underline; }
+    </style>
 </head>
 <body>
     <h1>Web Sayfama Hoşgeldiniz!</h1>
@@ -15,5 +26,31 @@
         <br>-Onun dışında bazı çizimlerim (perspektif, karakalem vs.) iyidir ve şu an çizimleri çok iyi olmayan Jojo, Evangelion ve Devil May Cry birleşimi bir manga üzerinde çalışmaktayım.
         <br>-Ayrıca Rpg Maker üzerinden kendi oyunumu geliştiriyorum. Fazla talep gelirse ve oyunu bitirirsem itch.io üzerinden yayınlarım.
         <br><br>Aslında her şey bu kadar başka söylenecek bir söz yok. tanıştığımıza memnun oldum.</p>
+
+    <!-- RSS Haberleri Burada Görünecek -->
+    <div id="rss-feed">
+        <h2>Güncel Teknoloji Haberleri</h2>
+    </div>
+
+    <script>
+        const feeds = [
+            "https://www.theverge.com/rss/index.xml",
+            "https://techcrunch.com/feed/",
+            "https://www.wired.com/feed/rss"
+        ];
+
+        feeds.forEach(url => {
+            fetch(`https://api.rss2json.com/v1/api.json?rss_url=${url}`)
+                .then(res => res.json())
+                .then(data => {
+                    let output = `<div class="feed-block"><h3>${data.feed.title}</h3><ul>`;
+                    data.items.slice(0, 5).forEach(item => {
+                        output += `<li><a href="${item.link}" target="_blank">${item.title}</a></li>`;
+                    });
+                    output += "</ul></div>";
+                    document.getElementById("rss-feed").innerHTML += output;
+                });
+        });
+    </script>
 </body>
 </html>
