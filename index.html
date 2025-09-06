@@ -1,222 +1,223 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Kolsuz Nero</title>
+  <meta name="description" content="Kolsuz Nero - teknoloji haberleri, Music for Programming oynatıcı ve internet hız testi." />
   <style>
     :root{
-      --blue1:#1e3c72;
-      --blue2:#2a5298;
-      --card-bg:#ffffff;
-      --page-bg:#f5f7fa;
+      --blue1:#1e3c72; --blue2:#2a5298;
+      --page-bg:#f5f7fa; --card-bg:#ffffff;
+      --accent:#2a5298;
     }
     *{box-sizing:border-box}
+    html,body{height:100%}
     body{
-      margin:0;
-      font-family: "Segoe UI", Roboto, Arial, sans-serif;
-      background:var(--page-bg);
-      color:#222;
-      -webkit-font-smoothing:antialiased;
+      margin:0; font-family: "Segoe UI", Roboto, Arial, sans-serif;
+      background:var(--page-bg); color:#222; -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
 
     /* Header */
     header{
       background: linear-gradient(135deg,var(--blue1),var(--blue2));
-      color:white;
-      padding:18px 12px;
-      box-shadow:0 4px 18px rgba(0,0,0,0.12);
+      color:white; padding:18px 12px; box-shadow:0 4px 18px rgba(0,0,0,0.12);
     }
     .header-inner{
-      max-width:1100px;
-      margin:0 auto;
-      display:flex;
-      gap:16px;
-      align-items:center;
-      padding:6px;
+      max-width:1100px; margin:0 auto; display:flex; gap:14px; align-items:center; padding:6px;
     }
-    .profile-pic{
-      width:72px;
-      height:72px;
-      border-radius:50%;
-      border:3px solid rgba(255,255,255,0.9);
-      object-fit:cover;
-      flex:0 0 72px;
+    figure.profile{
+      display:flex; gap:12px; align-items:center; margin:0;
     }
-    .title{
-      display:flex;
-      flex-direction:column;
-      align-items:flex-start;
+    .profile-pic{ width:72px; height:72px; border-radius:50%; border:3px solid rgba(255,255,255,0.95); object-fit:cover; flex:0 0 72px; }
+    .title{ display:flex; flex-direction:column; align-items:flex-start; }
+    .title h1{ margin:0; font-size:1.6rem; letter-spacing:0.2px }
+    .title p{ margin:4px 0 0; font-size:0.95rem; opacity:0.95 }
+
+    /* Layout */
+    main{ max-width:1100px; margin:22px auto; padding:0 16px 40px 16px }
+    .grid{ display:grid; grid-template-columns:1fr 360px; gap:18px }
+    @media (max-width:900px){ .grid{ grid-template-columns:1fr } }
+
+    .card{
+      background:var(--card-bg); border-radius:12px; padding:16px; box-shadow:0 6px 18px rgba(20,30,60,0.06);
     }
-    .title h1{margin:0;font-size:1.6rem;letter-spacing:0.2px}
-    .title p{margin:4px 0 0;font-size:0.95rem;opacity:0.95}
+    h2{ color:var(--blue2); margin:0 0 12px 0; }
 
-    /* Main layout */
-    main{max-width:1100px;margin:24px auto;padding:0 16px}
-    .grid{display:grid;grid-template-columns:1fr 360px;gap:18px}
-    @media (max-width:900px){ .grid{grid-template-columns:1fr} }
+    /* Feeds */
+    .feed-block{ margin-bottom:12px }
+    .feed-title{ font-weight:600; color:var(--blue1); margin-bottom:8px }
+    .feed-list{ list-style:none; padding:0; margin:0; display:grid; gap:8px }
+    .feed-list li{ background:#f0f4ff; padding:10px 12px; border-radius:8px; transition:transform .12s,box-shadow .12s; }
+    .feed-list li:hover{ transform:translateY(-4px); box-shadow:0 6px 16px rgba(30,50,120,0.08) }
+    .feed-list a{ color:var(--blue2); text-decoration:none; font-weight:500 }
 
-    section.card{
-      background:var(--card-bg);
-      border-radius:12px;
-      padding:18px;
-      box-shadow:0 6px 18px rgba(20,30,60,0.06);
-    }
-    h2{color:var(--blue2);margin:0 0 12px 0}
+    /* Music widget */
+    .music-widget{ display:flex; flex-direction:column; gap:12px; align-items:stretch }
+    .track-info{ display:flex; gap:12px; align-items:center }
+    .track-meta{ flex:1 }
+    .track-title{ font-weight:700 }
+    .track-sub{ font-size:0.9rem; color:#555; margin-top:4px }
 
-    /* RSS feed list */
-    .feed-block{margin-bottom:12px}
-    .feed-title{font-weight:600;color:var(--blue1);margin-bottom:8px}
-    .feed-list{list-style:none;padding:0;margin:0;display:grid;gap:8px}
-    .feed-list li{
-      background:#f0f4ff;
-      padding:10px 12px;border-radius:8px;
-      transition:transform .12s,box-shadow .12s;
-    }
-    .feed-list li:hover{transform:translateY(-4px);box-shadow:0 6px 16px rgba(30,50,120,0.08)}
-    .feed-list a{color:var(--blue2);text-decoration:none;font-weight:500}
-
-    /* Music widget (right column) */
-    .music-widget{display:flex;flex-direction:column;gap:12px;align-items:stretch}
-    .track-info{display:flex;gap:12px;align-items:center}
-    .track-meta{flex:1}
-    .track-meta .track-title{font-weight:700}
-    .track-meta .track-sub{font-size:0.9rem;color:#555;margin-top:4px}
-
-    .controls{display:flex;gap:8px;align-items:center}
+    .controls{ display:flex; gap:8px; align-items:center; flex-wrap:wrap }
     .btn{
-      background:var(--blue1);
-      color:white;
-      border:none;
-      padding:10px 14px;
-      border-radius:10px;
-      cursor:pointer;
-      font-weight:600;
+      background:var(--blue1); color:white; border:none; padding:10px 14px; border-radius:10px; cursor:pointer; font-weight:700;
     }
-    .btn.secondary{background:#e6eefc;color:var(--blue2);font-weight:700}
-    .btn:active{transform:translateY(1px)}
+    .btn.secondary{ background:#e6eefc; color:var(--blue2); font-weight:700 }
+    .btn:active{ transform:translateY(1px) }
 
-    .progress{
-      width:100%;
-      height:8px;
-      background:#eef4ff;
-      border-radius:8px;
-      overflow:hidden;
-    }
-    .progress > span{
-      display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue1),var(--blue2));
-    }
+    .progress{ width:100%; height:8px; background:#eef4ff; border-radius:8px; overflow:hidden; cursor:pointer; }
+    .progress > span{ display:block; height:100%; width:0%; background:linear-gradient(90deg,var(--blue1),var(--blue2)); transition:width .12s linear; }
 
-    footer{max-width:1100px;margin:28px auto 36px;padding:12px 16px;text-align:center;color:#fff;background:linear-gradient(135deg,var(--blue1),var(--blue2));border-radius:10px}
-    small{opacity:.9}
+    .small-muted{ font-size:0.9rem; color:#666 }
+
+    footer{ max-width:1100px; margin:28px auto 36px; padding:12px 16px; text-align:center; color:#fff; background:linear-gradient(135deg,var(--blue1),var(--blue2)); border-radius:10px }
+
+    a.inline{ color:var(--blue2); text-decoration:none; font-weight:600 }
+
+    /* Accessibility focus */
+    a:focus, button:focus { outline: 3px solid rgba(42,82,152,0.18); outline-offset: 2px; }
+
+    /* Responsive tweaks */
+    @media (max-width:520px){
+      .header-inner{ gap:10px }
+      .profile-pic{ width:56px; height:56px; flex:0 0 56px; }
+      .title h1{ font-size:1.2rem }
+    }
   </style>
 </head>
 <body>
-
-  <header>
+  <header role="banner">
     <div class="header-inner">
-      <img src="profil.jpg" alt="Kolsuz Nero" class="profile-pic">
-      <div class="title">
-        <h1>Kolsuz Nero</h1>
-        <p>İsviçre çakısı gibi bir adam 🔧🎤✍️🎨</p>
-      </div>
+      <figure class="profile" aria-hidden="false">
+        <img src="profil.jpg" alt="Kolsuz Nero profil fotoğrafı" class="profile-pic" />
+        <figcaption class="title">
+          <h1>Kolsuz Nero</h1>
+          <p>İsviçre çakısı gibi bir adam 🔧🎤✍️🎨</p>
+        </figcaption>
+      </figure>
     </div>
   </header>
 
-  <main>
+  <main role="main">
     <div class="grid">
-      <!-- LEFT: About + Tech RSS feeds -->
-      <div>
-        <section class="card">
-          <h2>Hakkımda</h2>
+      <!-- LEFT column: about + feeds -->
+      <section aria-labelledby="about-title" class="card">
+        <h2 id="about-title">Hakkımda</h2>
+        <article>
           <p>
             Esenlikler dilerim efendim. Ben Kolsuz Nero. Çok merak edeceğiniz bir yönüm yok ama İsviçre çakısı gibi bir insanım.
             Şairim, sesim çok yönlü, manga ve oyun projeleriyle meşgulüm. Tanıştığımıza memnun oldum.
           </p>
-        </section>
+        </article>
+      </section>
 
-        <section class="card" id="tech-feeds">
-          <h2>Güncel Teknoloji Haberleri</h2>
-          <!-- Haberler buraya gelecek -->
-          <div id="feeds-container" aria-live="polite">
-            <p style="color:#666;margin:0">Yükleniyor...</p>
-          </div>
-        </section>
-      </div>
+      <aside aria-labelledby="music-title">
+        <section class="card music-widget" id="music-card" aria-labelledby="music-title" role="region">
+          <h2 id="music-title">Music for Programming</h2>
 
-      <!-- RIGHT: Music widget -->
-      <aside>
-        <section class="card music-widget" id="music-card">
-          <h2>Music for Programming</h2>
-
-          <div id="mfp-status">
+          <div id="mfp-status" aria-live="polite">
             <div class="track-info">
               <div style="width:64px;height:64px;border-radius:8px;background:#f0f0f0;display:flex;align-items:center;justify-content:center;color:#999">MFP</div>
               <div class="track-meta">
                 <div class="track-title" id="track-title">Yükleniyor...</div>
-                <div class="track-sub" id="track-sub">Music for Programming - latest</div>
+                <div class="track-sub" id="track-sub">Music for Programming · son bölüm</div>
               </div>
             </div>
           </div>
 
-          <div class="controls" style="margin-top:6px">
-            <button id="playBtn" class="btn">Play</button>
-            <button id="stopBtn" class="btn secondary">Stop</button>
-            <a id="openLink" class="btn secondary" style="text-decoration:none" target="_blank" rel="noopener">Siteyi Aç</a>
+          <div class="controls" style="margin-top:6px" role="group" aria-label="Müzik kontrolleri">
+            <button id="backBtn" class="btn secondary" title="Geri 10 saniye">« 10s</button>
+            <button id="playBtn" class="btn" title="Oynat / Duraklat">Play</button>
+            <button id="forwardBtn" class="btn secondary" title="İleri 10 saniye">10s »</button>
+            <button id="stopBtn" class="btn secondary" title="Durdur">Stop</button>
+            <a id="openLink" class="btn secondary" style="text-decoration:none" target="_blank" rel="noopener noreferrer" aria-label="Music for Programming sayfasını aç">Siteyi Aç</a>
           </div>
 
           <div style="margin-top:8px">
-            <div class="progress" aria-hidden="true"><span id="prog-bar"></span></div>
+            <div id="prog-container" class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+              <span id="prog-bar" style="width:0%"></span>
+            </div>
             <div style="display:flex;justify-content:space-between;font-size:0.85rem;margin-top:6px;color:#444">
-              <span id="cur-time">00:00</span>
-              <span id="dur-time">00:00</span>
+              <time id="cur-time" datetime="PT0M0S">00:00</time>
+              <time id="dur-time" datetime="PT0M0S">00:00</time>
             </div>
           </div>
 
-          <!-- Hidden native audio used for playback -->
-          <audio id="mfp-audio" preload="none"></audio>
+          <audio id="mfp-audio" preload="metadata" crossorigin="anonymous" aria-hidden="true"></audio>
         </section>
 
-        <section class="card" style="margin-top:14px">
-          <h2>Hızlı Bağlantılar</h2>
-          <p style="margin:0"><a href="https://github.com" target="_blank" rel="noopener">GitHub</a> · <a href="https://youtube.com" target="_blank" rel="noopener">YouTube</a> · <a href="https://itch.io" target="_blank" rel="noopener">itch.io</a></p>
+        <section class="card" style="margin-top:14px" aria-labelledby="speed-title">
+          <h2 id="speed-title">Internet Speed Test</h2>
+          <p class="small-muted" id="speed-note">Download &amp; Upload hızını ölçer. Test sırasında büyük veri transferi gerçekleşir. Mobilde veri kullanımı olabilir.</p>
+
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+            <button id="speedBtn" class="btn" aria-live="polite">Hızı Ölç</button>
+            <button id="speedResetBtn" class="btn secondary">Sıfırla</button>
+          </div>
+
+          <div style="margin-top:10px">
+            <div id="speedResult" class="small-muted" role="status">Sonuç burada görünecek</div>
+          </div>
+        </section>
+
+        <section class="card" style="margin-top:14px" aria-labelledby="links-title">
+          <h2 id="links-title">Hızlı Bağlantılar</h2>
+          <nav aria-label="Hızlı bağlantılar">
+            <p style="margin:0">
+              <a class="inline" href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a> ·
+              <a class="inline" href="https://youtube.com" target="_blank" rel="noopener noreferrer">YouTube</a> ·
+              <a class="inline" href="https://itch.io" target="_blank" rel="noopener noreferrer">itch.io</a>
+            </p>
+          </nav>
         </section>
       </aside>
     </div>
+
+    <!-- Tech feeds outside grid (full width) for semantic clarity -->
+    <section class="card" id="tech-feeds" aria-labelledby="tech-title" style="margin-top:18px">
+      <h2 id="tech-title">Güncel Teknoloji Haberleri</h2>
+      <div id="feeds-container" aria-live="polite">
+        <p class="small-muted" style="margin:0">Yükleniyor...</p>
+      </div>
+    </section>
   </main>
 
-  <footer>
+  <footer role="contentinfo">
     <small>© 2025 Kolsuz Nero · Tüm Hakları Saklıdır</small>
   </footer>
 
   <script>
-    // ---------- Helpers ----------
+    // helpers
     const allOrigins = url => 'https://api.allorigins.win/get?url=' + encodeURIComponent(url);
+    const techFeeds = [
+      "https://www.theverge.com/rss/index.xml",
+      "https://techcrunch.com/feed/",
+      "https://www.wired.com/feed/rss"
+    ];
+    const $id = id => document.getElementById(id);
 
+    // fetch XML via proxy
     async function fetchXML(url){
       const res = await fetch(allOrigins(url));
-      if(!res.ok) throw new Error('CORS proxy hata');
+      if(!res.ok) throw new Error('CORS proxy hata: ' + res.status);
       const json = await res.json();
       const parser = new DOMParser();
       const xml = parser.parseFromString(json.contents, 'application/xml');
       return xml;
     }
 
-    // ---------- Tech feeds (sol tarafta) ----------
-    const techFeeds = [
-      "https://www.theverge.com/rss/index.xml",
-      "https://techcrunch.com/feed/",
-      "https://www.wired.com/feed/rss"
-    ];
-
+    // Load tech feeds
     async function loadTechFeeds(){
-      const container = document.getElementById('feeds-container');
+      const container = $id('feeds-container');
       container.innerHTML = '';
+      let anyLoaded = false;
       for(const f of techFeeds){
         try{
           const xml = await fetchXML(f);
-          const feedTitle = xml.querySelector('channel > title')?.textContent || f;
-          const items = Array.from(xml.querySelectorAll('item')).slice(0,4);
+          const feedTitle = xml.querySelector('channel > title')?.textContent?.trim() || f;
+          const items = Array.from(xml.querySelectorAll('item')).slice(0,6);
           const block = document.createElement('div');
           block.className = 'feed-block';
           const titleEl = document.createElement('div');
@@ -228,89 +229,99 @@
           items.forEach(it=>{
             const li = document.createElement('li');
             const a = document.createElement('a');
-            const link = it.querySelector('link')?.textContent || it.querySelector('guid')?.textContent || '#';
-            const t = it.querySelector('title')?.textContent || '—';
+            const link = (it.querySelector('link')?.textContent || it.querySelector('guid')?.textContent || '#').trim();
+            const t = (it.querySelector('title')?.textContent || '—').trim();
             a.href = link;
             a.target = '_blank';
-            a.rel = 'noopener';
+            a.rel = 'noopener noreferrer';
             a.textContent = t;
             li.appendChild(a);
             ul.appendChild(li);
           });
           block.appendChild(ul);
           container.appendChild(block);
+          anyLoaded = true;
         }catch(err){
           console.warn('Feed yüklenemedi', f, err);
         }
       }
-      // fallback message if empty
-      if(container.children.length === 0){
-        container.innerHTML = '<p style="color:#666;margin:0">Haberler yüklenemedi. (CORS proxy gerekebilir)</p>';
+      if(!anyLoaded){
+        container.innerHTML = '<p class="small-muted" style="margin:0">Haberler yüklenemedi. (CORS proxy gerekebilir)</p>';
       }
     }
 
-    // ---------- Music For Programming (sağ kutu) ----------
+    // Music for Programming
     async function loadMusicForProgramming(){
       const rss = 'https://musicforprogramming.net/rss.xml';
-      const audioEl = document.getElementById('mfp-audio');
-      const playBtn = document.getElementById('playBtn');
-      const stopBtn = document.getElementById('stopBtn');
-      const titleEl = document.getElementById('track-title');
-      const subEl = document.getElementById('track-sub');
-      const openLink = document.getElementById('openLink');
-      const progBar = document.getElementById('prog-bar');
-      const curTime = document.getElementById('cur-time');
-      const durTime = document.getElementById('dur-time');
+      const audioEl = $id('mfp-audio');
+      const playBtn = $id('playBtn');
+      const stopBtn = $id('stopBtn');
+      const backBtn = $id('backBtn');
+      const forwardBtn = $id('forwardBtn');
+      const titleEl = $id('track-title');
+      const subEl = $id('track-sub');
+      const openLink = $id('openLink');
+      const progBar = $id('prog-bar');
+      const progContainer = $id('prog-container');
+      const curTime = $id('cur-time');
+      const durTime = $id('dur-time');
 
       try{
         const xml = await fetchXML(rss);
         const item = xml.querySelector('item');
-        if(!item) throw new Error('No items');
-        const itemTitle = item.querySelector('title')?.textContent || 'Music for Programming';
-        const itemLink = item.querySelector('link')?.textContent || 'https://musicforprogramming.net/latest/';
-        // enclosure may hold the audio url
-        const enclosure = item.querySelector('enclosure');
-        let audioUrl = enclosure ? enclosure.getAttribute('url') : null;
+        if(!item) throw new Error('MFP item yok');
+        const itemTitle = item.querySelector('title')?.textContent?.trim() || 'Music for Programming';
+        const itemLink = item.querySelector('link')?.textContent?.trim() || 'https://musicforprogramming.net/latest/';
 
-        // Some entries might place audio in <link> or in a media:content - try to find fallback
-        if(!audioUrl){
-          const mediaContent = item.querySelector('media\\:content, content');
-          if(mediaContent) audioUrl = mediaContent.getAttribute('url') || mediaContent.textContent;
-        }
+        let audioUrl = item.querySelector('enclosure')?.getAttribute('url')
+                    || item.querySelector('media\\:content, content')?.getAttribute('url')
+                    || null;
 
-        // If still no audioUrl, try to find mp3 link in description
         if(!audioUrl){
           const desc = item.querySelector('description')?.textContent || '';
           const m = desc.match(/https?:\/\/[^"'\s]+\.mp3/);
           if(m) audioUrl = m[0];
         }
 
-        if(!audioUrl) throw new Error('Audio URL bulunamadı');
+        if(!audioUrl){
+          // fallback: parse item page for mp3 via proxy
+          try{
+            const itemPageRes = await fetch(allOrigins(itemLink));
+            if(itemPageRes.ok){
+              const itemPageJson = await itemPageRes.json();
+              const html = itemPageJson.contents || '';
+              const m2 = html.match(/https?:\/\/[^"'\s]+\.mp3/);
+              if(m2) audioUrl = m2[0];
+            }
+          }catch(e){
+            // ignore fallback error
+          }
+        }
 
-        // set UI
+        if(!audioUrl) throw new Error('Audio URL bulunamadı (MFP)');
+
         titleEl.textContent = itemTitle;
-        subEl.textContent = 'Music for Programming · Son bölüm';
+        subEl.textContent = 'Music for Programming · son bölüm';
         openLink.href = itemLink;
 
-        // set audio src
         audioEl.src = audioUrl;
-        // don't autoplay to respect browsers — user will press Play
         audioEl.preload = 'metadata';
+        audioEl.crossOrigin = "anonymous";
 
-        // Update duration/time/progress
         audioEl.addEventListener('loadedmetadata', ()=>{
           durTime.textContent = formatTime(audioEl.duration || 0);
         });
         audioEl.addEventListener('timeupdate', ()=>{
           const pct = (audioEl.currentTime / (audioEl.duration || 1)) * 100;
           progBar.style.width = pct + '%';
+          progContainer.setAttribute('aria-valuenow', Math.floor(pct));
           curTime.textContent = formatTime(audioEl.currentTime || 0);
         });
         audioEl.addEventListener('ended', ()=>{
           playBtn.textContent = 'Play';
         });
 
-        // Play button
+        // Controls
         playBtn.addEventListener('click', async ()=>{
           try{
             if(audioEl.paused){
@@ -322,31 +333,111 @@
             }
           }catch(e){
             console.warn('Playback blocked', e);
+            alert('Tarayıcı otomatik oynatmayı engelliyor. Lütfen bir kez play tuşuna basın.');
           }
         });
 
-        // Stop button
         stopBtn.addEventListener('click', ()=>{
           audioEl.pause();
           audioEl.currentTime = 0;
           playBtn.textContent = 'Play';
         });
 
+        backBtn.addEventListener('click', ()=>{ audioEl.currentTime = Math.max(0, audioEl.currentTime - 10); });
+        forwardBtn.addEventListener('click', ()=>{ audioEl.currentTime = Math.min(audioEl.duration || Infinity, audioEl.currentTime + 10); });
+
+        // Seek on click or keyboard
+        progContainer.addEventListener('click', (e)=>{
+          try{
+            const rect = progContainer.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const pct = Math.max(0, Math.min(1, x / rect.width));
+            audioEl.currentTime = pct * (audioEl.duration || 0);
+          }catch(err){}
+        });
+        progContainer.addEventListener('keydown', (e)=>{
+          if(e.key === 'ArrowLeft') audioEl.currentTime = Math.max(0, audioEl.currentTime - 5);
+          if(e.key === 'ArrowRight') audioEl.currentTime = Math.min(audioEl.duration || Infinity, audioEl.currentTime + 5);
+        });
       }catch(err){
         console.error('MFP yükleme hatası', err);
-        document.getElementById('track-title').textContent = 'Yüklenemedi';
-        document.getElementById('track-sub').textContent = 'Music for Programming verisi alınamadı.';
+        titleEl.textContent = 'Yüklenemedi';
+        subEl.textContent = 'Music for Programming verisi alınamadı.';
       }
     }
 
     function formatTime(t){
-      if(!isFinite(t)) return '00:00';
+      if(!isFinite(t) || t <= 0) return '00:00';
       const m = Math.floor(t/60).toString().padStart(2,'0');
       const s = Math.floor(t%60).toString().padStart(2,'0');
       return `${m}:${s}`;
     }
 
-    // ---------- Init ----------
+    // Speed test (download + upload)
+    (function speedTestModule(){
+      const speedBtn = $id('speedBtn');
+      const resetBtn = $id('speedResetBtn');
+      const out = $id('speedResult');
+
+      const downloadUrl = 'https://upload.wikimedia.org/wikipedia/commons/3/3f/Fronalpstock_big.jpg'; // ~2MB
+      const uploadEndpoint = 'https://httpbin.org/post'; // may have CORS
+
+      speedBtn.addEventListener('click', async ()=>{
+        out.textContent = 'Ölçülüyor... (lütfen bekleyin)';
+        speedBtn.disabled = true;
+        resetBtn.disabled = true;
+        try{
+          // DOWNLOAD
+          const startDL = performance.now();
+          const resp = await fetch(downloadUrl, { cache: 'no-store' });
+          if(!resp.ok) throw new Error('Download request başarısız: ' + resp.status);
+          const blob = await resp.blob();
+          const endDL = performance.now();
+          const durationDL = Math.max(0.001, (endDL - startDL) / 1000);
+          const bitsLoadedDL = blob.size * 8;
+          const downloadMbps = ((bitsLoadedDL / durationDL) / 1024 / 1024);
+
+          // UPLOAD
+          const sizeBytes = 2 * 1024 * 1024; // 2MB
+          const uploadData = new Uint8Array(sizeBytes);
+          for(let i=0;i<uploadData.length;i+=4096) uploadData[i] = (i * 13) & 255;
+
+          const startUL = performance.now();
+          let uploadOk = false;
+          try{
+            const upResp = await fetch(uploadEndpoint, { method: 'POST', body: uploadData });
+            if(!upResp.ok) throw new Error('Upload endpoint hata ' + upResp.status);
+            uploadOk = true;
+          }catch(upErr){
+            console.warn('Upload testi başarısız (CORS veya endpoint):', upErr);
+            uploadOk = false;
+          }
+          const endUL = performance.now();
+          const durationUL = Math.max(0.001, (endUL - startUL) / 1000);
+          const bitsUploaded = uploadData.length * 8;
+          const uploadMbps = uploadOk ? ((bitsUploaded / durationUL) / 1024 / 1024) : null;
+
+          out.innerHTML = `
+            Download: <strong>${downloadMbps.toFixed(2)} Mbps</strong>
+            <br> (süre: ${durationDL.toFixed(2)}s)
+            <br>
+            Upload: <strong>${ uploadMbps ? uploadMbps.toFixed(2) + ' Mbps' : 'Başarısız (CORS veya endpoint engeli)' }</strong>
+            <br> (süre: ${durationUL.toFixed(2)}s)
+          `;
+        }catch(e){
+          out.textContent = 'Hata oluştu: ' + (e.message || e);
+        }finally{
+          speedBtn.disabled = false;
+          resetBtn.disabled = false;
+        }
+      });
+
+      resetBtn.addEventListener('click', ()=>{
+        out.textContent = 'Sonuç burada görünecek';
+      });
+    })();
+
+    // Init
     (async function init(){
       loadTechFeeds();
       loadMusicForProgramming();
