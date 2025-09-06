@@ -1,56 +1,161 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kolsuz Nero</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        h1, h2 { color: #333; }
-        #rss-feed { margin-top: 30px; }
-        .feed-block { margin-bottom: 25px; }
-        .feed-block h3 { margin-bottom: 10px; color: #444; }
-        .feed-block ul { list-style: none; padding: 0; }
-        .feed-block li { margin-bottom: 8px; }
-        .feed-block a { text-decoration: none; color: #0066cc; }
-        .feed-block a:hover { text-decoration: underline; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kolsuz Nero</title>
+  <style>
+    /* Genel */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f7fa;
+      color: #333;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    header p {
+      margin-top: 0.5rem;
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    section {
+      background: white;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      transition: transform 0.2s ease;
+    }
+
+    section:hover {
+      transform: translateY(-4px);
+    }
+
+    h2 {
+      margin-top: 0;
+      color: #2a5298;
+    }
+
+    p {
+      line-height: 1.6;
+    }
+
+    /* RSS haberleri */
+    #rss-feed h2 {
+      margin-bottom: 1rem;
+    }
+
+    .feed-block {
+      margin-bottom: 1.5rem;
+    }
+
+    .feed-block h3 {
+      margin: 0 0 0.5rem;
+      color: #1e3c72;
+    }
+
+    .feed-block ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .feed-block li {
+      margin: 0.5rem 0;
+      padding: 0.5rem;
+      background: #f0f4ff;
+      border-radius: 8px;
+      transition: background 0.2s ease;
+    }
+
+    .feed-block li:hover {
+      background: #dbe4ff;
+    }
+
+    .feed-block a {
+      text-decoration: none;
+      color: #2a5298;
+      font-weight: 500;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #1e3c72;
+      color: white;
+      margin-top: 2rem;
+    }
+  </style>
 </head>
 <body>
-    <h1>Web Sayfama Hoşgeldiniz!</h1>
-    <h2>Kolsuz Nero Kimdir?</h2>
-    <p>Esenlikler dilerim efendim. Ben Kolsuz Nero. Çok merak edeceğiniz bir yönüm yok ama İsviçre çakısı gibi bir insanım. Özelliklerim say say bitmez ama size birkaçını söyleyebilirim:
-        <br>-Öncelikle buradaysanız beni ya Youtube'dan, Instagram'dan ya da X üzerinden tanımışsınızdır. Sosyal medya platformlarımın genel amacı Türk oyun kitlesine hitap etmek. Onun dışında bileceğiniz başka özelliklerim:
-        <br>-Şairim, şiirlerim anlamsal oalrak çok güzel ama biçimsel olarak berbattır. Muallim Naci şiirlerimi görse beni sopayla dövmeye gelirdi.
-        <br>-Sesimi çok iyi kullanabiliyorum. Mesela birçok sesim vardır. Bunlardan bazıları normal sesim, kız sesim, bas sesim, diz sesim ve soytarı sesim. Bunun yanında nedenini anlamamakla birlikte bir konuşma bozukluğum var.
-        <br>-Onun dışında bazı çizimlerim (perspektif, karakalem vs.) iyidir ve şu an çizimleri çok iyi olmayan Jojo, Evangelion ve Devil May Cry birleşimi bir manga üzerinde çalışmaktayım.
-        <br>-Ayrıca Rpg Maker üzerinden kendi oyunumu geliştiriyorum. Fazla talep gelirse ve oyunu bitirirsem itch.io üzerinden yayınlarım.
-        <br><br>Aslında her şey bu kadar başka söylenecek bir söz yok. tanıştığımıza memnun oldum.</p>
+  <header>
+    <h1>Kolsuz Nero</h1>
+    <p>İsviçre çakısı gibi bir adam 🔧🎤✍️🎨</p>
+  </header>
 
-    <!-- RSS Haberleri Burada Görünecek -->
-    <div id="rss-feed">
-        <h2>Güncel Teknoloji Haberleri</h2>
-    </div>
+  <main>
+    <section>
+      <h2>Kolsuz Nero Kimdir?</h2>
+      <p>
+        Esenlikler dilerim efendim. Ben Kolsuz Nero. Çok merak edeceğiniz bir yönüm yok ama İsviçre çakısı gibi bir insanım. Özelliklerim say say bitmez ama size birkaçını söyleyebilirim:
+        <br><br>- Öncelikle buradaysanız beni ya Youtube'dan, Instagram'dan ya da X üzerinden tanımışsınızdır. Sosyal medya platformlarımın genel amacı Türk oyun kitlesine hitap etmek.  
+        <br>- Şairim, şiirlerim anlamsal olarak çok güzel ama biçimsel olarak berbattır. Muallim Naci şiirlerimi görse beni sopayla dövmeye gelirdi.  
+        <br>- Sesimi çok iyi kullanabiliyorum. Mesela birçok sesim vardır: normal sesim, kız sesim, bas sesim, diz sesim ve soytarı sesim. Bunun yanında nedenini anlamamakla birlikte bir konuşma bozukluğum var.  
+        <br>- Bazı çizimlerim (perspektif, karakalem vs.) iyidir ve şu an Jojo, Evangelion ve Devil May Cry birleşimi bir manga üzerinde çalışmaktayım.  
+        <br>- Ayrıca RPG Maker üzerinden kendi oyunumu geliştiriyorum. Fazla talep gelirse ve oyunu bitirirsem itch.io üzerinden yayınlarım.  
+        <br><br>Aslında her şey bu kadar başka söylenecek bir söz yok. Tanıştığımıza memnun oldum.
+      </p>
+    </section>
 
-    <script>
-        const feeds = [
-            "https://www.theverge.com/rss/index.xml",
-            "https://techcrunch.com/feed/",
-            "https://www.wired.com/feed/rss"
-        ];
+    <section id="rss-feed">
+      <h2>Güncel Teknoloji Haberleri</h2>
+    </section>
+  </main>
 
-        feeds.forEach(url => {
-            fetch(`https://api.rss2json.com/v1/api.json?rss_url=${url}`)
-                .then(res => res.json())
-                .then(data => {
-                    let output = `<div class="feed-block"><h3>${data.feed.title}</h3><ul>`;
-                    data.items.slice(0, 5).forEach(item => {
-                        output += `<li><a href="${item.link}" target="_blank">${item.title}</a></li>`;
-                    });
-                    output += "</ul></div>";
-                    document.getElementById("rss-feed").innerHTML += output;
-                });
+  <footer>
+    © 2025 Kolsuz Nero | Tüm Hakları Saklıdır
+  </footer>
+
+  <script>
+    const feeds = [
+      "https://www.theverge.com/rss/index.xml",
+      "https://techcrunch.com/feed/",
+      "https://www.wired.com/feed/rss"
+    ];
+
+    feeds.forEach(url => {
+      fetch(`https://api.rss2json.com/v1/api.json?rss_url=${url}`)
+        .then(res => res.json())
+        .then(data => {
+          let output = `<div class="feed-block"><h3>${data.feed.title}</h3><ul>`;
+          data.items.slice(0, 5).forEach(item => {
+            output += `<li><a href="${item.link}" target="_blank">${item.title}</a></li>`;
+          });
+          output += "</ul></div>";
+          document.getElementById("rss-feed").innerHTML += output;
         });
-    </script>
+    });
+  </script>
 </body>
 </html>
